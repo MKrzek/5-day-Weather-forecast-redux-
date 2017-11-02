@@ -1,4 +1,11 @@
-export default function (state=null, action){
-    console.log ('action received', action)
+import {FETCH_WEATHER} from '../actions/index.js';
+
+export default function (state=[], action){
+    switch(action.type){
+        case FETCH_WEATHER: 
+           return [action.playload.data, ...state];
+           {/*return state.concat([action.payload.data])*/}
+    }
+   
     return state;
 }

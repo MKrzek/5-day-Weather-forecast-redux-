@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import chart from '../components/Chart.jsx'
+
 class WeatherList extends React.Component{
     
     renderWeather=(cityData)=>{
@@ -8,6 +10,9 @@ class WeatherList extends React.Component{
         console.log (temps)
             return <tr key={name}>
                         <td>{name}</td>
+                        <td>
+                            
+                        </td>
                    </tr>
 
     }

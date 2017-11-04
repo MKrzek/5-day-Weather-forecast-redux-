@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import chart from '../components/Chart.jsx'
+import Chart from '../components/Chart.jsx';
 
 class WeatherList extends React.Component{
     
@@ -11,7 +11,7 @@ class WeatherList extends React.Component{
             return <tr key={name}>
                         <td>{name}</td>
                         <td>
-                            
+                            <Chart data={temps} color='orange'/>
                         </td>
                    </tr>
 

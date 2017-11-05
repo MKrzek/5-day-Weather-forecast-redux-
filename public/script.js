@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d564017117685dffc2a2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "bc1b99714fd6e25b881f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -20866,7 +20866,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
 const API_KEY = 'a390214491b6bc7a8ba0e0735659aec7';
-const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?&units=metric&appid=${API_KEY}`;
+const ROOT_URL = `https://api.openweathermap.org/data/2.5/forecast?&units=metric&appid=${API_KEY}`;
 
 const FETCH_WEATHER= 'FETCH_WEATHER';
 /* harmony export (immutable) */ __webpack_exports__["FETCH_WEATHER"] = FETCH_WEATHER;

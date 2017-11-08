@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxPromise from 'redux-promise';
+import throttle from 'lodash/throttle';
 import reducers from './reducers';
 import App from './components/App.jsx';
 import {loadState, saveState} from './LocalStorage.jsx';
@@ -13,10 +14,10 @@ const store=createStore(
     persistedState,
     applyMiddleware(ReduxPromise)
 );
-store.subscribe(()=>{
+store.subscribe(throttle(()=>{
     saveState(store.getState());
     
-})
+}, 1000));
 
 
 document.addEventListener('DOMContentLoaded', function () {

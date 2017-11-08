@@ -4,6 +4,17 @@ import Chart from '../components/Chart.jsx';
 import Google_map from '../components/Google_map.jsx';
 
 class WeatherList extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            removebutton:'',
+        }
+    }
+    handleRemoveItem=()=>{
+        this.setState({
+            removebutton: event.target.value,
+        })
+    }
     
     renderWeather=(cityData)=>{
         const name=cityData.city.name;
@@ -18,6 +29,10 @@ class WeatherList extends React.Component{
                         <td><Chart data={temps} color='orange' units='C'/></td>
                         <td><Chart data={pressures} color='blue' units='hPa'/></td>
                         <td><Chart data={humidities} color='green' units='%'/></td>
+                        <td><span className='input-group-btn'>
+                            <button className='btn btn-secondary' onClick={this.handleRemoveItem}>Remove</button>
+                            </span>
+                        </td>
                    </tr>
 
     }

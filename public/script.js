@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "bc1b99714fd6e25b881f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9b98819215d2c18f16de"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -21194,16 +21194,23 @@ var _App = __webpack_require__(283);
 
 var _App2 = _interopRequireDefault(_App);
 
+var _LocalStorage = __webpack_require__(290);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxPromise2.default)(_redux.createStore);
+var persistedState = (0, _LocalStorage.loadState)();
+var store = (0, _redux.createStore)(_reducers2.default, persistedState, (0, _redux.applyMiddleware)(_reduxPromise2.default));
+store.subscribe(function () {
+    (0, _LocalStorage.saveState)(store.getState());
+    console.log(store);
+});
 
 document.addEventListener('DOMContentLoaded', function () {
-        _reactDom2.default.render(_react2.default.createElement(
-                _reactRedux.Provider,
-                { store: createStoreWithMiddleware(_reducers2.default) },
-                _react2.default.createElement(_App2.default, null)
-        ), document.querySelector('#app'));
+    _reactDom2.default.render(_react2.default.createElement(
+        _reactRedux.Provider,
+        { store: store },
+        _react2.default.createElement(_App2.default, null)
+    ), document.querySelector('#app'));
 });
 
 /***/ }),
@@ -55423,6 +55430,36 @@ var Google_map = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Google_map;
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var loadState = exports.loadState = function loadState() {
+    try {
+        var serializedState = localStorage.getItem('state');
+        console.log('state', serializedState);
+        if (serializedState === null) {
+            return undefined;
+        }
+        return JSON.parse(serializedState);
+    } catch (err) {
+        return undefined;
+    }
+};
+var saveState = exports.saveState = function saveState(state) {
+    try {
+        var serializedState = JSON.stringify(state);
+        localStorage.setItem('state', serializedState);
+        console.log('state', serializedState);
+    } catch (err) {}
+};
 
 /***/ })
 /******/ ]);

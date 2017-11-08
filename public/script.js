@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9b98819215d2c18f16de"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "267c21c4cd3c45a6b67b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -20867,21 +20867,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 const API_KEY = 'a390214491b6bc7a8ba0e0735659aec7';
 const ROOT_URL = `https://api.openweathermap.org/data/2.5/forecast?&units=metric&appid=${API_KEY}`;
+const citiesURL='city.list.json';
 
-const FETCH_WEATHER= 'FETCH_WEATHER';
+const FETCH_WEATHER = 'FETCH_WEATHER';
 /* harmony export (immutable) */ __webpack_exports__["FETCH_WEATHER"] = FETCH_WEATHER;
 
 
-function fetchWeather(city){
-    const url=`${ROOT_URL}&q=${city},us`;
-    const request=__WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url);
+function fetchWeather(city) {
    
-    return {
-        type: FETCH_WEATHER,
-        payload: request
-    };
+    const url = `${ROOT_URL}&q=${city}`;
+    const request = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url);
+    return {type: FETCH_WEATHER, payload: request};
 }
 
+
+
+    
+           
+    
+
+
+    
 
 
 /***/ }),
@@ -21202,7 +21208,6 @@ var persistedState = (0, _LocalStorage.loadState)();
 var store = (0, _redux.createStore)(_reducers2.default, persistedState, (0, _redux.applyMiddleware)(_reduxPromise2.default));
 store.subscribe(function () {
     (0, _LocalStorage.saveState)(store.getState());
-    console.log(store);
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -55444,7 +55449,7 @@ Object.defineProperty(exports, "__esModule", {
 var loadState = exports.loadState = function loadState() {
     try {
         var serializedState = localStorage.getItem('state');
-        console.log('state', serializedState);
+
         if (serializedState === null) {
             return undefined;
         }

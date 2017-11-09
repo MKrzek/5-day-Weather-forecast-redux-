@@ -7,12 +7,13 @@ import {removeItem} from '../actions/index.js';
 
 class WeatherList extends React.Component{
     
-    handleRemoveItem=(event)=>{
-      if (typeof this.props.removeItem === 'function') {
-           this.props.removeItem(this.props.weather)}
-       console.log('remove click works')
+     handleRemoveItem = (event) => {    
+     if (typeof this.props.removeItem === 'function') {
+        this.props.removeItem(this.props.weather)
+    }
+    console.log('remove click works')
 }
-    
+
     
     renderWeather=(cityData)=>{
         const name=cityData.city.name;
@@ -21,7 +22,7 @@ class WeatherList extends React.Component{
         const humidities = cityData.list.map(weather => weather.main.humidity);
         const {lon, lat}=cityData.city.coord;
         
-        console.log (temps)
+       
             return <tr key={name}>
                         <td><Google_map lon={lon} lat={lat}/></td>
                         <td><Chart data={temps} color='orange' units='C'/></td>
@@ -34,6 +35,10 @@ class WeatherList extends React.Component{
                    </tr>
 
     }
+
+
+
+
     render(){
         return <table className='table table-hover'>
                   <thead>

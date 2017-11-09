@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d9ebfc09edeca82c83ab"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8abf3e79694a3380e4fe"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -5884,12 +5884,14 @@ function fetchWeather(city) {
     return {type: FETCH_WEATHER, payload: request};
 }
 
-function removeItem(city){
+function removeItem(weather){
+       
          return {
              type: REMOVE_ITEM, 
-             payload: city 
+             payload: weather, 
+             
             }
-    console.log ('to jest payload', payload)
+           
     
              
 }
@@ -36599,9 +36601,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 const rootReducer=Object(__WEBPACK_IMPORTED_MODULE_0_redux__["combineReducers"])({
    weather: __WEBPACK_IMPORTED_MODULE_1__reducer_weather_js__["a" /* default */],
-   removeItem: __WEBPACK_IMPORTED_MODULE_2__reducer_removeItem_js__["a" /* default */]
+   removeItem: __WEBPACK_IMPORTED_MODULE_2__reducer_removeItem_js__["a" /* default */],
    
-});
+}
+
+);
 
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -36615,7 +36619,7 @@ const rootReducer=Object(__WEBPACK_IMPORTED_MODULE_0_redux__["combineReducers"])
 
 /* harmony default export */ __webpack_exports__["a"] = (function (state=[], action){
 
-    console.log ('payload', action)
+    
     switch(action.type){
         case __WEBPACK_IMPORTED_MODULE_0__actions_index_js__["FETCH_WEATHER"]: 
            return [action.payload.data, ...state];
@@ -37526,13 +37530,13 @@ module.exports = function spread(callback) {
 
 /* harmony default export */ __webpack_exports__["a"] = (function (state = [], action) {
 
-    console.log('payload', action)
+    console.log('Your payload to be removed', action)
     switch (action.type) {
 
         case __WEBPACK_IMPORTED_MODULE_0__actions_index_js__["REMOVE_ITEM"]:
-            return [
-                action.payload.data
-            ];
+            const index=state.filter(city=> city.id===action.id)
+            return [...state.slice(0, index),
+                    ...state.slice(index+1)];
 
     }
     return state;
@@ -37764,7 +37768,6 @@ var WeatherList = function (_React$Component) {
                 lat = _cityData$city$coord.lat;
 
 
-            console.log(temps);
             return _react2.default.createElement(
                 'tr',
                 { key: name },

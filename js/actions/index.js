@@ -13,12 +13,14 @@ export function fetchWeather(city) {
     return {type: FETCH_WEATHER, payload: request};
 }
 
-export function removeItem(city){
+export function removeItem(weather){
+       
          return {
              type: REMOVE_ITEM, 
-             payload: city 
+             payload: weather, 
+             
             }
-    console.log ('to jest payload', payload)
+           
     
              
 }

@@ -3,8 +3,10 @@ import WeatherReducer from './reducer_weather.js';
 import RemoveItem from './reducer_removeItem.js';
 const rootReducer=combineReducers({
    weather: WeatherReducer,
-   removeItem: RemoveItem
+   removeItem: RemoveItem,
    
-});
+}
+
+);
 
 export default rootReducer;

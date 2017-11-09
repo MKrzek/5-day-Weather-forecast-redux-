@@ -1,20 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import Chart from '../components/Chart.jsx';
 import Google_map from '../components/Google_map.jsx';
+import {removeItem} from '../actions/index.js';
 
 class WeatherList extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            removebutton:'',
-        }
-    }
-    handleRemoveItem=()=>{
-        this.setState({
-            removebutton: event.target.value,
-        })
-    }
+    
+    handleRemoveItem=(event)=>{
+      if (typeof this.props.handleRemoveItem === 'function') {
+           this.props.removeItem(this.props.weather)}
+       console.log('remove click works')
+}
+    
     
     renderWeather=(cityData)=>{
         const name=cityData.city.name;
@@ -58,4 +56,7 @@ function mapStateToProps ({weather}){
 }
 {/*function mapStateToProps({weather}){
 const weather=state.weather*/}
-export default connect(mapStateToProps)(WeatherList);
+function mapDispatchToProps(dispatch){
+        return bindActionCreators({removeItem}, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherList);

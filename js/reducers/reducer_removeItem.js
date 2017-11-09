@@ -4,6 +4,7 @@ export default function (state = [], action) {
 
     console.log('payload', action)
     switch (action.type) {
+
         case REMOVE_ITEM:
             return [
                 action.payload.data

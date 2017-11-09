@@ -8,7 +8,7 @@ import {removeItem} from '../actions/index.js';
 class WeatherList extends React.Component{
     
     handleRemoveItem=(event)=>{
-      if (typeof this.props.handleRemoveItem === 'function') {
+      if (typeof this.props.removeItem === 'function') {
            this.props.removeItem(this.props.weather)}
        console.log('remove click works')
 }

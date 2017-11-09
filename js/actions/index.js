@@ -14,11 +14,13 @@ export function fetchWeather(city) {
 }
 
 export function removeItem(city){
-    const storedLocations = JSON.parse(localStorage.getItem('state'));
-    console.log (storedLocations)
-    storedLocations = storedLocations.filter((item) => item !== city)
-    console.log ('remove action works')
-    return {type: REMOVE_ITEM, payload: storedLocations};
+         return {
+             type: REMOVE_ITEM, 
+             payload: city 
+            }
+    console.log ('to jest payload', payload)
+    
+             
 }
 
 

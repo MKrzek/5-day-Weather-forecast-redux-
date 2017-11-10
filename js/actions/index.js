@@ -13,16 +13,13 @@ export function fetchWeather(city) {
     return {type: FETCH_WEATHER, payload: request};
 }
 
-export function removeItem(weather){
-       
-         return {
-             type: REMOVE_ITEM, 
-             payload: weather, 
-             
-            }
-           
+export function removeItem(location){
     
-             
+       return {
+             type: REMOVE_ITEM, 
+             payload: location, 
+            }  
+              
 }
 
 

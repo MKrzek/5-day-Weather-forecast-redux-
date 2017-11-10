@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8abf3e79694a3380e4fe"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "84cc6f1a47a76b4a439c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -5884,16 +5884,13 @@ function fetchWeather(city) {
     return {type: FETCH_WEATHER, payload: request};
 }
 
-function removeItem(weather){
-       
-         return {
-             type: REMOVE_ITEM, 
-             payload: weather, 
-             
-            }
-           
+function removeItem(location){
     
-             
+       return {
+             type: REMOVE_ITEM, 
+             payload: location, 
+            }  
+              
 }
 
 
@@ -37529,15 +37526,12 @@ module.exports = function spread(callback) {
 
 
 /* harmony default export */ __webpack_exports__["a"] = (function (state = [], action) {
-
-    console.log('Your payload to be removed', action)
     switch (action.type) {
 
         case __WEBPACK_IMPORTED_MODULE_0__actions_index_js__["REMOVE_ITEM"]:
-            const index=state.filter(city=> city.id===action.id)
+            const index=state.filter(item=> item===action.payload)
             return [...state.slice(0, index),
                     ...state.slice(index+1)];
-
     }
     return state;
 });
@@ -37747,7 +37741,7 @@ var WeatherList = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WeatherList.__proto__ || Object.getPrototypeOf(WeatherList)).call.apply(_ref, [this].concat(args))), _this), _this.handleRemoveItem = function (event) {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WeatherList.__proto__ || Object.getPrototypeOf(WeatherList)).call.apply(_ref, [this].concat(args))), _this), _this.handleRemoveItem = function () {
             if (typeof _this.props.removeItem === 'function') {
                 _this.props.removeItem(_this.props.weather);
             }
@@ -37770,7 +37764,7 @@ var WeatherList = function (_React$Component) {
 
             return _react2.default.createElement(
                 'tr',
-                { key: name },
+                { key: name, id: name },
                 _react2.default.createElement(
                     'td',
                     null,

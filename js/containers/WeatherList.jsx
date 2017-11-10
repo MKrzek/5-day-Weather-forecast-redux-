@@ -1,17 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+
 import Chart from '../components/Chart.jsx';
 import Google_map from '../components/Google_map.jsx';
 import {removeItem} from '../actions/index.js';
 
 class WeatherList extends React.Component{
     
-     handleRemoveItem = (event) => {    
+     handleRemoveItem = () => {      
      if (typeof this.props.removeItem === 'function') {
-        this.props.removeItem(this.props.weather)
+     this.props.removeItem(this.props.weather)
     }
     console.log('remove click works')
+    
 }
 
     
@@ -23,16 +25,16 @@ class WeatherList extends React.Component{
         const {lon, lat}=cityData.city.coord;
         
        
-            return <tr key={name}>
+        return <tr key={name} id={name}>
                         <td><Google_map lon={lon} lat={lat}/></td>
                         <td><Chart data={temps} color='orange' units='C'/></td>
                         <td><Chart data={pressures} color='blue' units='hPa'/></td>
                         <td><Chart data={humidities} color='green' units='%'/></td>
                         <td><span className='input-group-btn'>
-                            <button className='btn btn-secondary' onClick={this.handleRemoveItem}>Remove</button>
+                            <button className = 'btn btn-secondary' onClick={this.handleRemoveItem}>Remove</button>
                             </span>
                         </td>
-                   </tr>
+                </tr>
 
     }
 

@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "84cc6f1a47a76b4a439c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "33d2d9673b015b441f1c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -37525,11 +37525,12 @@ module.exports = function spread(callback) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions_index_js__ = __webpack_require__(39);
 
 
-/* harmony default export */ __webpack_exports__["a"] = (function (state = [], action) {
+/* harmony default export */ __webpack_exports__["a"] = (function (state=[], action) {
     switch (action.type) {
 
         case __WEBPACK_IMPORTED_MODULE_0__actions_index_js__["REMOVE_ITEM"]:
-            const index=state.filter(item=> item===action.payload)
+            
+            let index=state.filter(item=> item===action.payload)
             return [...state.slice(0, index),
                     ...state.slice(index+1)];
     }
@@ -37705,17 +37706,13 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Location = __webpack_require__(311);
+
+var _Location2 = _interopRequireDefault(_Location);
+
 var _reactRedux = __webpack_require__(82);
 
 var _redux = __webpack_require__(32);
-
-var _Chart = __webpack_require__(300);
-
-var _Chart2 = _interopRequireDefault(_Chart);
-
-var _Google_map = __webpack_require__(303);
-
-var _Google_map2 = _interopRequireDefault(_Google_map);
 
 var _index = __webpack_require__(39);
 
@@ -37731,80 +37728,24 @@ var WeatherList = function (_React$Component) {
     _inherits(WeatherList, _React$Component);
 
     function WeatherList() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
         _classCallCheck(this, WeatherList);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WeatherList.__proto__ || Object.getPrototypeOf(WeatherList)).call.apply(_ref, [this].concat(args))), _this), _this.handleRemoveItem = function () {
-            if (typeof _this.props.removeItem === 'function') {
-                _this.props.removeItem(_this.props.weather);
-            }
-            console.log('remove click works');
-        }, _this.renderWeather = function (cityData) {
-            var name = cityData.city.name;
-            var temps = cityData.list.map(function (weather) {
-                return weather.main.temp;
-            });
-            var pressures = cityData.list.map(function (weather) {
-                return weather.main.pressure;
-            });
-            var humidities = cityData.list.map(function (weather) {
-                return weather.main.humidity;
-            });
-            var _cityData$city$coord = cityData.city.coord,
-                lon = _cityData$city$coord.lon,
-                lat = _cityData$city$coord.lat;
-
-
-            return _react2.default.createElement(
-                'tr',
-                { key: name, id: name },
-                _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(_Google_map2.default, { lon: lon, lat: lat })
-                ),
-                _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(_Chart2.default, { data: temps, color: 'orange', units: 'C' })
-                ),
-                _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(_Chart2.default, { data: pressures, color: 'blue', units: 'hPa' })
-                ),
-                _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(_Chart2.default, { data: humidities, color: 'green', units: '%' })
-                ),
-                _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'input-group-btn' },
-                        _react2.default.createElement(
-                            'button',
-                            { className: 'btn btn-secondary', onClick: _this.handleRemoveItem },
-                            'Remove'
-                        )
-                    )
-                )
-            );
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        return _possibleConstructorReturn(this, (WeatherList.__proto__ || Object.getPrototypeOf(WeatherList)).apply(this, arguments));
     }
 
     _createClass(WeatherList, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            var location = this.props.weather.map(function (location, index) {
+
+                return _react2.default.createElement(_Location2.default, {
+                    key: index,
+                    location: location,
+                    handleRemoveItem: _this2.handleRemoveItem });
+            });
+
             return _react2.default.createElement(
                 'table',
                 { className: 'table table-hover' },
@@ -37839,7 +37780,7 @@ var WeatherList = function (_React$Component) {
                 _react2.default.createElement(
                     'tbody',
                     null,
-                    this.props.weather.map(this.renderWeather)
+                    location
                 )
             );
         }
@@ -37848,8 +37789,8 @@ var WeatherList = function (_React$Component) {
     return WeatherList;
 }(_react2.default.Component);
 
-function mapStateToProps(_ref2) {
-    var weather = _ref2.weather;
+function mapStateToProps(_ref) {
+    var weather = _ref.weather;
 
     return { weather: weather }; //{weather}==={weather: weather}
 }
@@ -37858,7 +37799,7 @@ function mapStateToProps(_ref2) {
 function mapDispatchToProps(dispatch) {
     return (0, _redux.bindActionCreators)({ removeItem: _index.removeItem }, dispatch);
 }
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WeatherList);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(WeatherList);
 
 /***/ }),
 /* 300 */
@@ -56161,6 +56102,120 @@ var saveState = exports.saveState = function saveState(state) {
         localStorage.setItem('state', serializedState);
     } catch (err) {}
 };
+
+/***/ }),
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(14);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Chart = __webpack_require__(300);
+
+var _Chart2 = _interopRequireDefault(_Chart);
+
+var _Google_map = __webpack_require__(303);
+
+var _Google_map2 = _interopRequireDefault(_Google_map);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Location = function (_React$Component) {
+   _inherits(Location, _React$Component);
+
+   function Location() {
+      _classCallCheck(this, Location);
+
+      return _possibleConstructorReturn(this, (Location.__proto__ || Object.getPrototypeOf(Location)).apply(this, arguments));
+   }
+
+   _createClass(Location, [{
+      key: 'render',
+      value: function render() {
+
+         var cityData = this.props.location;
+         console.log(cityData);
+         var name = cityData.city.name;
+         var temps = cityData.list.map(function (weather) {
+            return weather.main.temp;
+         });
+         var pressures = cityData.list.map(function (weather) {
+            return weather.main.pressure;
+         });
+         var humidities = cityData.list.map(function (weather) {
+            return weather.main.humidity;
+         });
+         var _cityData$city$coord = cityData.city.coord,
+             lon = _cityData$city$coord.lon,
+             lat = _cityData$city$coord.lat;
+
+
+         return _react2.default.createElement(
+            'tr',
+            { key: name, id: name },
+            _react2.default.createElement(
+               'td',
+               null,
+               _react2.default.createElement(_Google_map2.default, { lon: lon, lat: lat })
+            ),
+            _react2.default.createElement(
+               'td',
+               null,
+               _react2.default.createElement(_Chart2.default, { data: temps, color: 'orange', units: 'C' })
+            ),
+            _react2.default.createElement(
+               'td',
+               null,
+               _react2.default.createElement(_Chart2.default, { data: pressures, color: 'blue', units: 'hPa' })
+            ),
+            _react2.default.createElement(
+               'td',
+               null,
+               _react2.default.createElement(_Chart2.default, { data: humidities, color: 'green', units: '%' })
+            ),
+            _react2.default.createElement(
+               'td',
+               null,
+               _react2.default.createElement(
+                  'span',
+                  { className: 'input-group-btn' },
+                  _react2.default.createElement(
+                     'button',
+                     { className: 'btn btn-secondary', onClick: this.props.handleRemoveItem },
+                     'Remove'
+                  )
+               )
+            )
+         );
+      }
+   }]);
+
+   return Location;
+}(_react2.default.Component);
+
+exports.default = Location;
 
 /***/ })
 /******/ ]);

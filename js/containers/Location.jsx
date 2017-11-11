@@ -8,24 +8,18 @@ import {removeItem} from '../actions/index.js';
 class Location extends React.Component {
 
     handleRemoveItem = () => {
-        this.props.removeItem(this.props.location);
-        console.log (this.props.location)
+        this.props.removeItem(this.props.city);
         console.log('remove button works')
+        console.log (this.props.city)
+        
     };
 
     render() {
-        const cityData = this.props.location;
-        console.log(cityData)
+        const cityData = this.props.city; 
         const name = cityData.city.name;
-        const temps = cityData
-            .list
-            .map(weather => weather.main.temp);
-        const pressures = cityData
-            .list
-            .map(weather => weather.main.pressure);
-        const humidities = cityData
-            .list
-            .map(weather => weather.main.humidity);
+        const temps = cityData.list.map(weather => weather.main.temp);
+        const pressures = cityData.list.map(weather => weather.main.pressure);
+        const humidities = cityData.list.map(weather => weather.main.humidity);
         const {lon, lat} = cityData.city.coord;
 
         return <tr key={name} id={name}>
@@ -42,6 +36,7 @@ class Location extends React.Component {
     }
 
 }
+
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({removeItem}, dispatch);
 }

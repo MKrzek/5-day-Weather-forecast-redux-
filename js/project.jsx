@@ -14,6 +14,7 @@ const store=createStore(
     persistedState,
     applyMiddleware(ReduxPromise)
 );
+
 store.subscribe(throttle(()=>{
     saveState(store.getState());
     

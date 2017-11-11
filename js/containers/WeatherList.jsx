@@ -5,10 +5,10 @@ import {connect} from 'react-redux';
 class WeatherList extends React.Component{
      
     render(){
-        const location=this.props.weather.map((location, index)=>{
+        const city=this.props.weather.map((city, index)=>{
             return <Location
                     key={index}
-                    location={location} />
+                    city={city} />
         }
 
     );
@@ -23,7 +23,7 @@ class WeatherList extends React.Component{
                       </tr>
                   </thead>
                   <tbody>
-                      {location}
+                      {city}
                   </tbody>
                </table>
     }
